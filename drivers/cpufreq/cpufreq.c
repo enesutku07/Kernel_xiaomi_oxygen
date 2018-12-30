@@ -752,20 +752,17 @@ static ssize_t show_bios_limit(struct cpufreq_policy *policy, char *buf)
 }
 
 #ifdef CONFIG_VOLTAGE_CONTROL
-extern ssize_t cpu_clock_get_vdd(char *buf);
-extern ssize_t cpu_clock_set_vdd(const char *buf, size_t count);
-
-static ssize_t show_UV_mV_table(struct cpufreq_policy *policy, char *buf)
-{
-	return cpu_clock_get_vdd(buf);
-}
-
-static ssize_t store_UV_mV_table(struct cpufreq_policy *policy,
-	const char *buf, size_t count)
-{
-	return cpu_clock_set_vdd(buf, count);
-}
-#endif
+ extern ssize_t get_Voltages(char *buf);
+ static ssize_t show_UV_mV_table(struct cpufreq_policy *policy, char *buf)
+ {
+ 	return get_Voltages(buf);
+ }
+ extern ssize_t set_Voltages(const char *buf, size_t count);
+ static ssize_t store_UV_mV_table(struct cpufreq_policy *policy, const char *buf, size_t count)
+ {
+ 	return set_Voltages(buf, count);
+ }
+ #endif
 
 #ifdef CONFIG_GPU_VOLTAGE
 
